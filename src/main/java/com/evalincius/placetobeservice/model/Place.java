@@ -1,4 +1,4 @@
-package com.evalincius.placetobeservice.models;
+package com.evalincius.placetobeservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
