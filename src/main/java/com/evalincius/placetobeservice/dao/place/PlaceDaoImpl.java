@@ -1,4 +1,4 @@
-package com.evalincius.placetobeservice.dao;
+package com.evalincius.placetobeservice.dao.place;
 
 import com.arangodb.ArangoCursor;
 import com.arangodb.model.AqlQueryOptions;

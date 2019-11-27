@@ -1,7 +1,7 @@
 package com.evalincius.placetobeservice.api;
 
 import com.evalincius.placetobeservice.model.Place;
-import com.evalincius.placetobeservice.service.PlaceService;
+import com.evalincius.placetobeservice.service.place.PlaceService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/places")
+@RequestMapping("/api/place")
 public class PlaceController {
 
     private PlaceService placeService;

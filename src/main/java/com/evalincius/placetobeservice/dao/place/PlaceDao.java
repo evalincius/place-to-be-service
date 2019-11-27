@@ -1,9 +1,9 @@
-package com.evalincius.placetobeservice.service;
+package com.evalincius.placetobeservice.dao.place;
 
 import com.evalincius.placetobeservice.model.Place;
 
 import java.util.List;
 
-public interface PlaceService {
+public interface PlaceDao {
     List<Place> getAllPlaces();
 }
