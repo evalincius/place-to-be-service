@@ -2,6 +2,7 @@ package com.evalincius.placetobeservice.api;
 
 import com.evalincius.placetobeservice.enums.CountryCode;
 import com.evalincius.placetobeservice.model.Country;
+import com.evalincius.placetobeservice.model.CountrySummary;
 import com.evalincius.placetobeservice.service.country.CountryService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,14 @@ public class CountryController {
         this.countryService = countryService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/list")
     public List<Country> getAllCountries(){
         return null;
+    }
+
+    @GetMapping("/summary/list")
+    public List<CountrySummary> getCountrySummaries(){
+        return countryService.getCountrySummaries();
     }
 
     @GetMapping("/{countryCode}")

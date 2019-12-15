@@ -11,4 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Place extends Audit {
     private String name;
+    private String countryCode;
+    private String city;
+    private Coordinates coordinates;
+    private String imageId;
+    private String address;
 }

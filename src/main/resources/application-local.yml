@@ -6,3 +6,10 @@ datasource:
     password:
     useSsl: false
     schema: PLACE_TO_BE
+
+minio:
+  enabled: true
+  endpoint: http://127.0.0.1:9000
+  access-key: CLGS35O23CETGCHUDILZ
+  secret-key: kNRbsqpGtC8owuLDbkJ5J6xOb3WpA+EZ0pBZkb6A
+  bucket-name: places

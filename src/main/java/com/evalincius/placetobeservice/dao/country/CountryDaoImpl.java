@@ -6,13 +6,17 @@ import com.arangodb.util.MapBuilder;
 import com.evalincius.placetobeservice.ArangoPersistentManager;
 import com.evalincius.placetobeservice.enums.CountryCode;
 import com.evalincius.placetobeservice.model.Country;
+import com.evalincius.placetobeservice.model.CountrySummary;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Repository
 public class CountryDaoImpl implements CountryDao {
     private static String COLLECTION = "country";
+    private static String GET_COUNTRY_SUMMARY_LIST_QUERY = "FOR i IN @@collection RETURN i";
     private ArangoPersistentManager persistentManager;
 
     public CountryDaoImpl(ArangoPersistentManager persistentManager) {
@@ -32,6 +36,20 @@ public class CountryDaoImpl implements CountryDao {
 
     @Override
     public String create(Country country) {
+        if (country.getKey() == null) {
+            country.setKey(UUID.randomUUID().toString());
+        }
         return persistentManager.createOrUpdate(COLLECTION, country);
+    }
+
+    @Override
+    public List<CountrySummary> getCountrySummaries() {
+        Map map = new MapBuilder().put("@collection", COLLECTION).get();
+        ArangoCursor cursor = persistentManager.getDatabase().query(
+                GET_COUNTRY_SUMMARY_LIST_QUERY,
+                map,
+                new AqlQueryOptions(),
+                CountrySummary.class);
+        return cursor.asListRemaining();
     }
 }
