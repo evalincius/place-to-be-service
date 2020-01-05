@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Repository
 public class PlaceDaoImpl implements PlaceDao{
@@ -34,10 +33,7 @@ public class PlaceDaoImpl implements PlaceDao{
 
     @Override
     public String createPlace(Place place) {
-        if (place.getKey() == null) {
-            place.setKey(UUID.randomUUID().toString());
-        }
-        return persistentManager.createOrUpdate(COLLECTION, place);
+        return persistentManager.insert(COLLECTION, place);
     }
 
     @Override

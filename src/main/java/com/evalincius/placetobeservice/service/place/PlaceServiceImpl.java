@@ -20,7 +20,9 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public List<Place> getAllPlaces() {
-        return placeDao.getAllPlaces();
+        List<Place> places = placeDao.getAllPlaces();
+        enrichWithFileUrl(places);
+        return places;
     }
 
     @Override
@@ -30,11 +32,20 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Override
     public List<Place> getPlacesByCountryAndCity(CountryCode countryCode, String city) {
-        return placeDao.getPlacesByCountryAndCity(countryCode, city);
+        List<Place> places = placeDao.getPlacesByCountryAndCity(countryCode, city);
+        enrichWithFileUrl(places);
+        return places;
     }
 
     @Override
     public String storeFile(MultipartFile file) {
         return fileStorageService.storeFile(file);
+    }
+
+    private void enrichWithFileUrl(List<Place> places) {
+        places.forEach(p -> {
+            String url = fileStorageService.getFileUrl(p.getImageId());
+            p.setImageURL(url);
+        });
     }
 }

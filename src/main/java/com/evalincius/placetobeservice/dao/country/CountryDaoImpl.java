@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Repository
 public class CountryDaoImpl implements CountryDao {
@@ -36,10 +35,7 @@ public class CountryDaoImpl implements CountryDao {
 
     @Override
     public String create(Country country) {
-        if (country.getKey() == null) {
-            country.setKey(UUID.randomUUID().toString());
-        }
-        return persistentManager.createOrUpdate(COLLECTION, country);
+        return persistentManager.insert(COLLECTION, country);
     }
 
     @Override

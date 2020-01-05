@@ -34,7 +34,7 @@ public class PlaceController {
         return placeService.createPlace(place);
     }
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/upload-file")
     public FileMetadata uploadFile(@RequestParam("file") MultipartFile file) {
         String id = placeService.storeFile(file);
         return FileMetadata.builder()
