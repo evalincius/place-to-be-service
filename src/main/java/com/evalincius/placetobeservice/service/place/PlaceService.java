@@ -1,6 +1,7 @@
 package com.evalincius.placetobeservice.service.place;
 
 import com.evalincius.placetobeservice.enums.CountryCode;
+import com.evalincius.placetobeservice.model.Filter;
 import com.evalincius.placetobeservice.model.Place;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,4 +15,6 @@ public interface PlaceService {
     List<Place> getPlacesByCountryAndCity(CountryCode countryCode, String city);
 
     String storeFile(MultipartFile file);
+
+    List<Place> getPlacesByFilter(Filter filter);
 }

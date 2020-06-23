@@ -2,6 +2,7 @@ package com.evalincius.placetobeservice.service.place;
 
 import com.evalincius.placetobeservice.dao.place.PlaceDao;
 import com.evalincius.placetobeservice.enums.CountryCode;
+import com.evalincius.placetobeservice.model.Filter;
 import com.evalincius.placetobeservice.model.Place;
 import com.evalincius.placetobeservice.service.file.FileStorageService;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,14 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<Place> getPlacesByCountryAndCity(CountryCode countryCode, String city) {
         List<Place> places = placeDao.getPlacesByCountryAndCity(countryCode, city);
+        enrichWithFileUrl(places);
+        return places;
+    }
+
+
+    @Override
+    public List<Place> getPlacesByFilter(Filter filter) {
+        List<Place> places = placeDao.getPlacesByFilter(filter);
         enrichWithFileUrl(places);
         return places;
     }

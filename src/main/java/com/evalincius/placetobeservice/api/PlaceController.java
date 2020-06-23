@@ -1,6 +1,7 @@
 package com.evalincius.placetobeservice.api;
 
 import com.evalincius.placetobeservice.enums.CountryCode;
+import com.evalincius.placetobeservice.model.Filter;
 import com.evalincius.placetobeservice.model.Place;
 import com.evalincius.placetobeservice.model.file.FileMetadata;
 import com.evalincius.placetobeservice.service.place.PlaceService;
@@ -10,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/place")
+@RequestMapping("/api/v1/places")
 public class PlaceController {
 
     private PlaceService placeService;
@@ -27,6 +28,11 @@ public class PlaceController {
     @GetMapping("list/{countryCode}/{city}")
     public List<Place> getPlacesByCountryAndCity(@PathVariable CountryCode countryCode, @PathVariable String city) {
         return placeService.getPlacesByCountryAndCity(countryCode, city);
+    }
+
+    @GetMapping()
+    public List<Place> searchPlaces(final Filter filter) {
+        return placeService.getPlacesByFilter(filter);
     }
 
     @PostMapping
