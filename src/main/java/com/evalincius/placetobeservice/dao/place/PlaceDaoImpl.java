@@ -22,9 +22,9 @@ public class PlaceDaoImpl implements PlaceDao{
             " RETURN d";
     private static String GET_PLACES_QUERY_HEADER = "FOR d IN "+ COLLECTION;
     private static String GET_PLACES_QUERY_FOOTER = " RETURN d";
-    private static String GET_PLACES_CITY_FILTER_QUERY = " FILTER d.countryCode == @countryCode";
-    private static String GET_PLACES_COUNTRY_FILTER_QUERY = " FILTER d.city == @city";
-    private static String GET_PLACES_FILTER_QUERY =
+    private static String GET_PLACES_COUNTRY_FILTER_QUERY = " FILTER d.countryCode IN @countryCodes";
+    private static String GET_PLACES_CITY_FILTER_QUERY = " FILTER d.city IN @cities";
+    private static String GET_PLACES_SEARCH_QUERY =
             " FILTER LIKE(d.city, CONCAT('%', @filter, '%'), true)" +
             " OR LIKE(d.address, CONCAT('%', @filter, '%'), true)" +
             " OR LIKE(d.countryCode, CONCAT('%', @filter, '%'), true)" +
@@ -80,10 +80,10 @@ public class PlaceDaoImpl implements PlaceDao{
             mapBuilder.put("filter", filter.getSearch());
         }
         if(!StringUtils.isEmpty(filter.getCountry())) {
-            mapBuilder.put("countryCode", filter.getCountry());
+            mapBuilder.put("countryCodes", filter.getCountry());
         }
         if(!StringUtils.isEmpty(filter.getCity())) {
-            mapBuilder.put("city", filter.getCity());
+            mapBuilder.put("cities", filter.getCity());
         }
         return mapBuilder.get();
     }
@@ -92,7 +92,7 @@ public class PlaceDaoImpl implements PlaceDao{
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(GET_PLACES_QUERY_HEADER);
         if(!StringUtils.isEmpty(filter.getSearch())) {
-            stringBuilder.append(GET_PLACES_FILTER_QUERY);
+            stringBuilder.append(GET_PLACES_SEARCH_QUERY);
         }
         if(!StringUtils.isEmpty(filter.getCountry())) {
             stringBuilder.append(GET_PLACES_COUNTRY_FILTER_QUERY);
